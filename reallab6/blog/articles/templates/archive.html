@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="{{ STATIC_URL }}/static/article.css">
+    <meta charset="utf-8">
+    <title>Архив статей</title>
+</head>
+<body>
+<div class="header">
+<img src="{{ STATIC_URL }}logo.jpg" />
+<div class="article-created- date">
+    {% if Current_user.is_anonymous %}
+    <a href="registration">Регистрация</a><br>
+    <a href="login">Вход</a>
+    {% else %}
+    <a href="article/new">Создать пост</a><br>
+    <a href="logout">Выход</a>
+    {% endif %}
+</div>
+</div>
+<div class="archive">
+{% for post in posts %}
+<div class="one-post">
+<h2 class="post-title"> <a href="article/{{post.id}}">{{ post.title }}</a></h2>
+<div class="article-info">
+<div class="article-author">{{ post.author.username }}</div>
+<div class="article-created- date">{{ post.created_date }}</div>
+</div>
+<p class="article-text">{{ post.get_excerpt }}</p>
+</div>
+{% endfor %}
+</div>
+<script src="{{ STATIC_URL }}js/helloworld.js"></script>
+</body>
+</html>
